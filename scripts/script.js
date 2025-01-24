@@ -31,6 +31,27 @@ document.getElementById('search-btn').addEventListener('click', () => {
       description: `Explore cities like ${country.cities.map(city => city.name).join(', ')}.`,
     }));
   }
+  // Search for cities within countries
+  else {
+    results = recommendationsData.countries.flatMap(country =>
+      country.cities.filter(city => city.name.toLowerCase().includes(keyword)).map(city => ({
+        name: city.name,
+        imageUrl: city.imageUrl,
+        description: city.description
+      }))
+    );
+  }
+
+  // Search for descriptions (in temples, beaches, and cities)
+  if (results.length === 0) {
+    results = [
+      ...recommendationsData.beaches.filter(beach => beach.description.toLowerCase().includes(keyword)),
+      ...recommendationsData.temples.filter(temple => temple.description.toLowerCase().includes(keyword)),
+      ...recommendationsData.countries.flatMap(country =>
+        country.cities.filter(city => city.description.toLowerCase().includes(keyword))
+      )
+    ];
+  }
 
   // Display results
   if (results.length > 0) {
@@ -45,7 +66,7 @@ document.getElementById('search-btn').addEventListener('click', () => {
       resultsContainer.appendChild(card);
     });
   } else {
-    resultsContainer.innerHTML = '<p>No results found for your search.</p>';
+    resultsContainer.innerHTML = '<p>No results found. Try searching for beaches, temples, or countries.</p>';
   }
 });
 
@@ -55,7 +76,7 @@ document.getElementById('clear-btn').addEventListener('click', () => {
   document.getElementById('recommendations').innerHTML = ''; // Clear results
 });
 
-
+// Scroll to recommendations section
 function scrollToRecommendations() {
   const recommendationsSection = document.getElementById('recommendations');
   recommendationsSection.scrollIntoView({
