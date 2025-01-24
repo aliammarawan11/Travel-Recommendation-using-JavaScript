@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelBloom - Home</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    
+    <div class="navbar">
+      <div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div>
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Search for recommendations..."
+        />
+        <button id="search-btn" onclick="scrollToRecommendations()">Search</button>
+        <button id="clear-btn">Clear</button>
+      </div>
+    </div>
+
+    <div class="home">
+      <div class="home-intro">
+        <h1>Welcome to TravelBloom</h1>
+        <p>
+          Discover the best travel destinations, beaches, temples, and cultural
+          experiences from around the world.
+        </p>
+      </div>
+    </div>
+
+    <div id="recommendations" class="recommendations">
+
+    </div>
+
+    <script>
+    
+      function scrollToRecommendations() {
+        const recommendationsSection = document.getElementById('recommendations');
+        recommendationsSection.scrollIntoView({
+          behavior: 'smooth',  
+          block: 'start'       
+        });
+      }
+    </script>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>
